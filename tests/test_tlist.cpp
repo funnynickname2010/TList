@@ -10,6 +10,7 @@ TEST(TList, newly_created_is_empty)
   EXPECT_EQ(lst.GetSize(), 0u);
 }
 
+
 TEST(TList, push_front_and_front_back_behavior)
 {
   TList<int> lst;
