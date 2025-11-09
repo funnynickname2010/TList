@@ -20,6 +20,7 @@ add_subdirectory(external/googletest)  # <- this will build gtest and gmock
 # Create test executable
 add_executable(unit_tests
     tests/test_tlist.cpp
+    tests/test_tlistnode.cpp
 )
 
 # Link libraries to the test executable

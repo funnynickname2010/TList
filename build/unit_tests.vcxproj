@@ -381,6 +381,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\Вячеслав\source\repos\TList\tests\test_tlist.cpp" />
+    <ClCompile Include="C:\Users\Вячеслав\source\repos\TList\tests\test_tlistnode.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
