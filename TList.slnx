@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="TList/TList.vcxproj" Id="c73b096e-a592-4c58-8d2d-51b77bb07003" />
+</Solution>
