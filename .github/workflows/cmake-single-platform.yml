@@ -1,0 +1,56 @@
+name: CMake Unit Tests (working)
+
+on:
+  push:
+    branches: [ working ]
+  pull_request:
+    branches: [ working ]
+
+jobs:
+  build-and-test-linux:
+    name: Linux build & test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clean build directory
+        run: rm -rf build
+
+      - name: Configure with CMake
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        # If you use vcpkg, uncomment and set path to your vcpkg toolchain:
+        # run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+      - name: Build
+        run: cmake --build build --config Release -- -j 2
+
+      - name: Run tests
+        run: |
+          cd build
+          ctest --output-on-failure
+
+  build-and-test-windows:
+    name: Windows build & test
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clean build directory
+        run: |
+          if exist build rmdir /s /q build
+
+      - name: Configure with CMake (MSVC)
+        run: cmake -S . -B build -G "Visual Studio 18 2026" -A x64 -DCMAKE_BUILD_TYPE=Release
+        # If you use a different Visual Studio generator, change the -G string (e.g. "Visual Studio 17 2022").
+        # If using vcpkg, add -DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake
+
+      - name: Build (MSBuild)
+        run: cmake --build build --config Release
+
+      - name: Run tests
+        run: |
+          ctest --test-dir build --output-on-failure -C Release
